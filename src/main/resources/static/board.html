@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    body {
+        text-align: center;
+    }
+
+    h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgba(171, 16, 41, 0.694);
+    }
+
+    button {
+        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 50%;
+        border: 0px;
+    }
+
+    input {
+        border-radius: 5%;
+    }
+
+    canvas {
+        padding: auto;
+        background-color: rgb(241, 241, 241);
+        border: 4px double rgba(171, 16, 41, 0.694);
+        border-radius: 2%;
+    }
+
+    .application {
+        display: none;
+    }
+</style>
+
+<head>
+    <title>Board</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/board.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
+</head>
+
+<body>
+    <h1>ReactBoard</h1>
+    <div id="user">
+        <p>Digite su nombre:</p>
+        <input type="text" id="userId" name="userId">
+        <button onclick="userId()">Submit</button>
+    </div>
+    <div id="application" class="application">
+        <button onclick="clearBoard()">Clear</button>
+        </br>
+        </br>
+        <input type="color" id="paint" value="#000000" />
+        <button onclick="colorSetter()"><img src="img/paintbrush.png" height="30" width="45" /></button>
+        </br>
+        </br>
+        <button onclick="colorEraser()"><img src="img/eraser.jpg" height="30" width="40" /></button>
+    </div>
+</body>
+
+</html>

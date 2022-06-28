@@ -27,8 +27,9 @@ class StatusComponent extends React.Component {
 
     checkStatus() {
         fetch("/status").then(res => res.json()).then(
-            (result) => {this.setState({isLoaded: true,status: result.status});},(error) => {
-                this.setState({isLoaded: true,error});})
+            (result) => { this.setState({ isLoaded: true, status: result.status }); }, (error) => {
+                this.setState({ isLoaded: true, error });
+            })
     }
 
     render() {
@@ -50,4 +51,4 @@ class StatusComponent extends React.Component {
     }
 }
 
-ReactDOM.render(<StatusComponent />,document.getElementById('status'));
+ReactDOM.render(<StatusComponent />, document.getElementById('status'));
