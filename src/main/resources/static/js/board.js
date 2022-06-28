@@ -1,4 +1,5 @@
 var paint = (0, 0, 0);
+var stomp;
 
 function userId() {
     const xhttp = new XMLHttpRequest();
@@ -13,6 +14,7 @@ function userId() {
 
 function setup() {
     createCanvas(850, 430);
+    stomp();
 }
 
 function draw() {
@@ -20,10 +22,31 @@ function draw() {
         fill(paint);
         stroke(paint);
         ellipse(mouseX, mouseY, 10, 10);
+        var json = {
+            xPos: mouseX,
+            yPos: mouseY,
+            colors: paint,
+            eraser: false,
+        }
+        refresh(json);
     }
-    if (mouseIsPressed === false) {
-        fill(10, 10, 10);
-    }
+}
+
+function stomp() {
+    var socket = new SockJS("/stompEndpoint");
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        stompClient.subscribe("/topic/board", function (event) {
+            var json = JSON.parse(event.body);
+            if(!json.eraser){
+                fill(json.colors);
+                stroke(json.colors);
+                ellipse(json.xPos, json.yPos, 10, 10);
+            }else{
+                clear();
+            }
+        });
+    });
 }
 
 function colorSetter() {
@@ -36,4 +59,12 @@ function colorEraser() {
 
 function clearBoard() {
     clear();
+    var json = {
+        eraser: true,
+    }
+    refresh(json);
+}
+
+function refresh(json) {
+    stompClient.send("/topic/board", {}, JSON.stringify(json));
 }
